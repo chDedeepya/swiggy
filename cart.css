@@ -1,0 +1,157 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: linear-gradient(to right, #ff4b2b, #ff416c);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo img {
+    height: 40px;
+}
+
+.dropdown button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 10;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.right a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    padding: 5px 10px;
+    border: 1px solid #ff4b2b;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* Hide the empty cart message */
+.empty-cart {
+    display: none;
+}
+
+.cart-items {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.cart-item img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+}
+
+.cart-item h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #ff4b2b;
+}
+
+.cart-item p {
+    margin: 0;
+    color: #555;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-selector input {
+    width: 40px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ff4b2b;
+    border-radius: 4px;
+}
+
+.proceed-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: linear-gradient(to right, #32cd32, #2ea62e);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.proceed-btn:hover {
+    background: linear-gradient(to right, #2ea62e, #228b22);
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+    border-top: 1px solid #eaeaea;
+    color: white;
+}
+
+.footer a {
+    color: #ffd5d5;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
