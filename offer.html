@@ -1,93 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCU1lqt2BVdwDnhdGAAZXhyfiCzL0fsls5Lw&s" type="image/x-icon">
-        <link rel="stylesheet" href="offers.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <title>Offers</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiggy - Offers</title>
+    <link rel="shortcut icon"
+        href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCU1lqt2BVdwDnhdGAAZXhyfiCzL0fsls5Lw&s"
+        type="image/x-icon">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
 
-    </head>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ff6600;
+            padding: 15px 50px;
+            color: white;
+            flex-wrap: wrap;
+        }
 
-    <body>
-        <header class="header">
-            <div class="left">
-                <a href="index.html" class="logo">Swiggy</a>
-                <div class="dropdown">
-                    <button>Location ▼</button>
-                    <div class="dropdown-content">
-                        <p>Hyderabad</p>
-                        <p>Bangalore</p>
-                        <p>Chennai</p>
-                    </div>
-                </div>
-            </div>
-            <nav class="right">
-                <a href="offers.html">Offers</a>
-                <a href="help.html">Help</a>
-                <a href="signin.html">Sign In</a>
-                <a href="search.html">Search</a>
-                <a href="cart.html" class="cart"><i class="fas fa-shopping-cart"></i></a>
-            </nav>
-        </header>
+        .header .left {
+            display: flex;
+            align-items: center;
+        }
 
-        <div class="offers-container">
-            <h2>🔥 Exclusive Food Offers</h2>
-            <p>Grab the best deals and discounts on your favorite meals.</p>
-    
-            <div class="offers-list">
-                <div class="offer-card">
-                    <img src="p.jpg" alt="Pizza Offer" height="100px" width="100px">
-                    <h3>50% Off on Pizzas</h3>
-                    <p>Enjoy flat 50% off on all pizzas. Use code: <b>PIZZA50</b></p>
-                    <button>Get Offer</button>
-                </div>
-    
-                <div class="offer-card">
-                    <img src="Burger.jpg" alt="Burger Offer" height="100px" width="100px">
-                    <h3>Buy 1 Get 1 Free - Burgers</h3>
-                    <p>Order a burger & get one free. Use code: <b>BOGO</b></p>
-                    <button>Get Offer</button>
-                </div>
-    
-                <div class="offer-card">
-                    <img src="i.jpg" alt="Dessert Offer" height="100px" width="100px">
-                    <h3>Free Dessert on Orders Above ₹399</h3>
-                    <p>Get a complimentary dessert. Use code: <b>SWEET399</b></p>
-                    <button>Get Offer</button>
-                </div>
-                <div class="offer-card">
-                    <img src="pp.jpg" alt="Dessert Offer" height="100px" width="100px">
-                    <h3>Free starter on Orders Above ₹399</h3>
-                    <p>Get a complimentary dessert. Use code: <b>SWEET399</b></p>
-                    <button>Get Offer</button>
-                </div>
-                <div class="offer-card">
-                    <img src="M.jpg" alt="Dessert Offer" height="100px" width="100px">
-                    <h3>Free shakes on Orders Above ₹399</h3>
-                    <p>Get a complimentary dessert. Use code: <b>SWEET399</b></p>
-                    <button>Get Offer</button>
-                </div>
-    
-                <div class="offer-card">
-                    <img src="b.jpg" alt="Combo Offer" height="100px" width="100px">
-                    <h3>Combo Meals at ₹199 Only</h3>
-                    <p>Get delicious combos at just ₹199. No code required!</p>
-                    <button>Get Offer</button>
+        .header .left .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .header .left a {
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .dropdown {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .dropdown button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 5px;
+            color: black;
+            z-index: 100;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content p {
+            margin: 0;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .right a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .right a i {
+            margin-right: 5px;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .search-bar {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .search-button {
+            padding: 5px 10px;
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-left: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: #e65c00;
+        }
+
+        .offers-container {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .offers-container h2 {
+            margin-bottom: 10px;
+        }
+
+        .offers-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .offer-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .offer-card img {
+            max-width: 100%;
+            height: 100px;
+            width: 100px;
+            border-radius: 10px;
+        }
+
+        .offer-card button {
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .offer-card button:hover {
+            background-color: #e65c00;
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: auto;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="left">
+            <a href="index.html" class="logo">
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCU1lqt2BVdwDnhdGAAZXhyfiCzL0fsls5Lw&s"
+                    alt="Swiggy" class="logo">
+                <a href="index.html">Swiggy</a>
+            </a>
+            <div class="dropdown">
+                <button>Location ▼</button>
+                <div class="dropdown-content">
+                    <p>Hyderabad</p>
+                    <p>Bangalore</p>
+                    <p>Chennai</p>
                 </div>
             </div>
         </div>
+        <nav class="right">
+            <a href="offers.html"><i class="fas fa-percent"></i> Offers</a>
+            <a href="help.html"><i class="fas fa-question-circle"></i> Help</a>
+            <a href="signin.html"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+            <a href="cart.html" class="cart"><i class="fas fa-shopping-cart"></i> Cart</a>
+        </nav>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search food...">
+            <button class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+    </header>
 
-        <footer class="footer">
-            <p>&copy; 2025 Swiggy Clone | Developed by Dedeepya</p>
-            <p>
-                <a href="privacy.html">Privacy Policy</a> | 
-                <a href="terms.html">Terms of Service</a> | 
-                <a href="contact.html">Contact Us</a>
-            </p>
-        </footer>
-    </body>
+    <!-- Offers Section -->
+    <div class="offers-container">
+        <h2>🔥 Exclusive Food Offers</h2>
+        <p>Grab the best deals and discounts on your favorite meals.</p>
+
+        <div class="offers-list">
+            <div class="offer-card">
+                <img src="p.jpg" alt="Pizza Offer">
+                <h3>50% Off on Pizzas</h3>
+                <p>Enjoy flat 50% off on all pizzas. Use code: <b>PIZZA50</b></p>
+                <button>Get Offer</button>
+            </div>
+
+            <div class="offer-card">
+                <img src="Burger.jpg" alt="Burger Offer">
+                <h3>Buy 1 Get 1 Free - Burgers</h3>
+                <p>Order a burger & get one free. Use code: <b>BOGO</b></p>
+                <button>Get Offer</button>
+            </div>
+
+            <div class="offer-card">
+                <img src="i.jpg" alt="Dessert Offer">
+                <h3>Free Dessert on Orders Above ₹399</h3>
+                <p>Get a complimentary dessert. Use code: <b>SWEET399</b></p>
+                <button>Get Offer</button>
+            </div>
+
+            <div class="offer-card">
+                <img src="pp.jpg" alt="Starter Offer">
+                <h3>Free Starter on Orders Above ₹399</h3>
+                <p>Enjoy a free starter. Use code: <b>STARTER399</b></p>
+                <button>Get Offer</button>
+            </div>
+
+            <div class="offer-card">
+                <img src="M.jpg" alt="Shake Offer">
+                <h3>Free Shakes on Orders Above ₹399</h3>
+                <p>Get a complimentary shake. Use code: <b>SHAKE399</b></p>
+                <button>Get Offer</button>
+            </div>
+
+            <div class="offer-card">
+                <img src="b.jpg" alt="Combo Offer">
+                <h3>Combo Meals at ₹199 Only</h3>
+                <p>Get delicious combos at just ₹199. No code required!</p>
+                <button>Get Offer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Swiggy Clone | Developed by Dedeepya</p>
+        <p>
+            <a href="privacy.html">Privacy Policy</a> |
+            <a href="terms.html">Terms of Service</a> |
+            <a href="contact.html">Contact Us</a>
+        </p>
+    </footer>
+</body>
 
 </html>

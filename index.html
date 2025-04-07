@@ -1,95 +1,369 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCU1lqt2BVdwDnhdGAAZXhyfiCzL0fsls5Lw&s" type="image/x-icon">
-    <link rel="stylesheet" href="header.css">
-    <link rel="stylesheet" href="home.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Swiggy</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCU1lqt2BVdwDnhdGAAZXhyfiCzL0fsls5Lw&s" type="image/x-icon"/>
+  <link rel="stylesheet" href="header.css" />
+  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Swiggy</title>
+  <style>
+    .main-container {
+      margin-left: 20px;
+    }
+
+    .scroll-wrapper {
+      position: relative;
+      margin: 20px 0;
+    }
+
+    .food-scroll {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 10px;
+      gap: 20px;
+    }
+
+    .food-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .food-item {
+      min-width: 100px;
+      flex: 0 0 auto;
+      text-align: center;
+    }
+
+    .food-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 8px;
+    }
+
+    .scroll-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: white;
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      cursor: pointer;
+      width: 35px;
+      height: 35px;
+      z-index: 1;
+    }
+
+    .scroll-btn.left {
+      left: -10px;
+    }
+
+    .scroll-btn.right {
+      right: -10px;
+    }
+
+    .restaurant-section {
+      padding: 30px 20px;
+    }
+
+    .restaurant-section h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .restaurant-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 20px;
+    }
+
+    .restaurant-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      padding: 10px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .restaurant-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .restaurant-card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+
+    .restaurant-card .offer-label {
+      position: absolute;
+      bottom: 120px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      font-size: 13px;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .restaurant-card h3 {
+      font-size: 16px;
+      margin: 5px 0;
+      font-weight: bold;
+    }
+
+    .restaurant-card .rating {
+      color: #16a34a;
+      font-size: 14px;
+    }
+
+    .restaurant-card .desc,
+    .restaurant-card .location {
+      font-size: 13px;
+      color: #555;
+    }
+
+    .filter-sort-bar {
+      margin-bottom: 20px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .filters button {
+      background-color: #f0f0f0;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 0.2s;
+    }
+
+    .filters button:hover {
+      background-color: #d9d9d9;
+    }
+  </style>
 </head>
 <body>
+  <div class="main-container">
+    <!-- Header -->
     <div class="header">
-        <div class="left">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_VIUxy03_CnoSZVcBeRX7l3gdYcBZ2245SA&s" alt="Swiggy Logo" class="logo">
-            <a href="index.html">Swiggy</a>
-            <div class="dropdown">
-                <button>Location ▼</button>
-                <div class="dropdown-content">
-                    <p>Hyderabad</p>
-                    <p>Bangalore</p>
-                    <p>Chennai</p>
-                </div>
-            </div>
+      <div class="left">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_VIUxy03_CnoSZVcBeRX7l3gdYcBZ2245SA&s" alt="Swiggy Logo" class="logo" />
+        <a href="index.html">Swiggy</a>
+        <div class="dropdown">
+          <button>Location ▼</button>
+          <div class="dropdown-content">
+            <p>Hyderabad</p>
+            <p>Bangalore</p>
+            <p>Chennai</p>
+          </div>
         </div>
-        <div class="right">
-            <a href="offer.html"><i class="fa-solid fa-percent"></i> Offers</a>
-            <a href="help.html"><i class="fa-solid fa-question-circle"></i> Help</a>
-            <a href="signin.html"><i class="fa-solid fa-user"></i> Sign In</a>
-            <a href="cart.html" class="cart"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
-            <div class="search-container">
-                <input type="text" class="search-bar" placeholder="Search food...">
-                <button class="search.html"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
+      </div>
+      <div class="right">
+        <a href="offer.html"><i class="fa-solid fa-percent"></i> Offers</a>
+        <a href="help.html"><i class="fa-solid fa-question-circle"></i> Help</a>
+        <a href="signin.html"><i class="fa-solid fa-user"></i> Sign In</a>
+        <a href="cart.html" class="cart"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+        <div class="search-container">
+          <input type="text" class="search-bar" placeholder="Search food..." />
+          <button class="search.html"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
+      </div>
     </div>
-    <div class="home-page-container">
-        <h2>What's on your mind?</h2>
-        <div class="food-container">
-            <div class="food-item">
-                <img src="p.jpg" alt="Pizza">
-                <div class="food-name">Pizza</div>
-            </div>
-            <div class="food-item">
-                <img src="Burger.jpg" alt="Burger">
-                <div class="food-name">Burger</div>
-            </div>
-            <div class="food-item">
-                <img src="b.jpg" alt="Biryani">
-                <div class="food-name">Biryani</div>
-            </div>
-            <div class="food-item">
-                <img src="i.jpg" alt="Ice Cream">
-                <div class="food-name">Ice Cream</div>
-            </div>
-        </div>
-    </div>
-    <div class="home-content">
-        <h2>Welcome to Our Food Delivery Service</h2>
-        <p>Discover a variety of delicious meals delivered straight to your doorstep.</p>
 
-        <div class="home-options">
-            <div class="option">
-                <i class="fa-solid fa-motorcycle"></i>
-                <h3>Fast Delivery</h3>
-                <p>Get your food delivered in record time.</p>
-            </div>
-            <div class="option">
-                <i class="fa-solid fa-star"></i>
-                <h3>Top-rated Restaurants</h3>
-                <p>Order from the best restaurants in your city.</p>
-            </div>
-            <div class="option">
-                <i class="fa-solid fa-tags"></i>
-                <h3>Exclusive Offers</h3>
-                <p>Save big with special discounts and offers.</p>
-                <button class="get-offer-btn">Get Offer</button>
-            </div>
-            <div class="option">
-                <i class="fa-solid fa-utensils"></i>
-                <h3>Wide Variety</h3>
-                <p>Explore a diverse range of cuisines and dishes.</p>
-            </div>
+    <!-- Food Scroll Section -->
+    <div class="home-page-container">
+      <h2>What's on your mind?</h2>
+      <div class="scroll-wrapper">
+        <button class="scroll-btn left" onclick="scrollLeft()">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <div class="food-scroll" id="foodScroll">
+          <div class="food-item"><img src="b.jpg"><p>Biryani</p></div>
+          <div class="food-item"><img src="Burger.jpg"><p>Burgers</p></div>
+          <div class="food-item"><img src="https://static01.nyt.com/images/2022/12/05/multimedia/nd-shish-kebab-1-2329/nd-shish-kebab-1-2329-jumbo.jpg"><p>Kebabs</p></div>
+          <div class="food-item"><img src="p.jpg"><p>Pizzas</p></div>
+          <div class="food-item"><img src="https://static.vecteezy.com/system/resources/previews/049/544/526/non_2x/traditional-indian-thali-platter-presenting-various-curries-and-naan-bread-photo.jpg"><p>North Indian</p></div>
+          <div class="food-item"><img src="https://www.chefajaychopra.com/assets/img/recipe/1-1666340067MasalaKhichdi1webp.webp"><p>Khichdi</p></div>
+          <div class="food-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Submarine_sandwich_with_toppings_and_dijon_mustard.jpg/1200px-Submarine_sandwich_with_toppings_and_dijon_mustard.jpg"><p>Sandwich</p></div>
+          <div class="food-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSU2ADhtpL9RaCFzteriqAEOSVnidjsO9x2g&s"><p>Noodles</p></div>
+          <div class="food-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlr0ST4xI-WCWr9eH6IogXXlZpJ-KJPxJfqA&s"><p>Rolls</p></div>
+          <div class="food-item"><img src="M.jpg"><p>Milkshake</p></div>
+          <div class="food-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1T2XwZ7hFtAUPO5Dcynt4Je2utjTb2XcIFA&s"><p>Juice</p></div>
+          <div class="food-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOeQ1V9ewZMSu9IYKaBY-B6FDg8djaWz_fIA&s"><p>Dosa</p></div>
+          <div class="food-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGzM5nv1GVB8ApWVnflXqM4yWIGUtggRzRgQ&s"><p>Ice Cream</p></div>
+          <div class="food-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu_kK91Lj3ndNZLCHSfEfSnGxxdes3D4fsdg&s"><p>Sweets</p></div>
         </div>
+
+        <button class="scroll-btn right" onclick="scrollRight()">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
     </div>
+
+    <!-- Filter and Sort Controls -->
+    <div class="filter-sort-bar">
+      <div class="filters">
+        <button>Filter</button>
+        <button>Sort By</button>
+        <button>Rating 4.0+</button>
+        <button>Fast Delivery</button>
+        <button>Pure Veg</button>
+        <button>Less than ₹300</button>
+        <button>Offers</button>
+        <button>New Arrivals</button>
+      </div>
+    </div>
+
+    <!-- Restaurant Listings Section -->
+    <div class="restaurant-section">
+      <h2>Restaurants with online food delivery </h2>
+      <div class="restaurant-grid">
+        <div class="restaurant-card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpPG9kDa_-kjGBUSzT5HR2lIdVxF0E6rhmSg&s" alt="Dessertino">
+          <div class="offer-label">ITEMS AT ₹75</div>
+          <h3>Dessertino Shakes And...</h3>
+          <p class="rating">⭐ 4.5 • 15–20 mins</p>
+          <p class="desc">Pizzas, Ice Cream, Beverages</p>
+          <p class="location">Guntur</p>
+        </div>
+
+        <div class="restaurant-card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvf2ZT8Glb5MzW1rx-fvYeXIAIvNkYuodCZw&s" alt="Hunter's Den">
+          <div class="offer-label">50% OFF UPTO ₹100</div>
+          <h3>Hunter's Den Restaurant</h3>
+          <p class="rating">⭐ 4.2 • 10–15 mins</p>
+          <p class="desc">Indian, Chinese</p>
+          <p class="location">Guntur</p>
+        </div>
+
+        <div class="restaurant-card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDszHxk8N0uoKonr60fk_zZ5K-ockLHihKBw&s" alt="Taj Corner">
+          <div class="offer-label">60% OFF UPTO ₹120</div>
+          <h3>Taj Corner</h3>
+          <p class="rating">⭐ 4.3 • 15–20 mins</p>
+          <p class="desc">Tandoor, Arabian</p>
+          <p class="location">Guntur</p>
+        </div>
+        <div class="restaurant-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdkXM8CCwjiq1ZCN1eAq3WQxgfRfEemrxMRg&s" alt="The caf`e">
+            <div class="offer-label">50% OFF UPTO ₹150</div>
+            <h3>The caf`e</h3>
+            <p class="rating">⭐ 4.2 • 10–15 mins</p>
+            <p class="desc">Indian, Chinese, Biryani</p>
+            <p class="location">Guntur</p>
+        </div>
+          <div class="restaurant-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRck94aBh4bxgfuzd6V14IFWI8-IAvX3MWssg&s" alt="The Kimchi">
+            <div class="offer-label">50% OFF UPTO ₹150</div>
+            <h3>The Kimchi</h3>
+            <p class="rating">⭐ 4.2 • 30–45 mins</p>
+            <p class="desc">Korean</p>
+            <p class="location">Guntur</p>
+          </div>
+          <div class="restaurant-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3GBF0o7H-qh44ye2PxRmN81MWk_cRk-JMhw&s" alt="The Chow">
+            <div class="offer-label">50% OFF UPTO ₹250</div>
+            <h3>The Chow</h3>
+            <p class="rating">⭐ 4.0 • 40–45 mins</p>
+            <p class="desc">Japanese</p>
+            <p class="location">Guntur</p>
+          </div>
+          <div class="restaurant-card">
+            <img src="https://cms.menutiger.com/wp-content/uploads/2024/08/Fastfood-counter-top-1024x536.webp" alt="Fast food corner">
+            <div class="offer-label">ITEMS AT ₹75</div>
+            <h3>Fast food corner</h3>
+            <p class="rating">⭐ 4.1 • 45–50 mins</p>
+            <p class="desc">Pizzas, Ice Cream, Burgers</p>
+            <p class="location">Guntur</p>
+          </div>
+          <div class="restaurant-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfipW8Jkph8k2VjMhDmtHa0_NmmXYGX2p7OA&s" alt="The Indo">
+            <div class="offer-label">ITEMS AT ₹150</div>
+            <h3>The Indo</h3>
+            <p class="rating">⭐ 4.7 • 55–60 mins</p>
+            <p class="desc">Hot dogs , soft drinks.....</p>
+            <p class="location">Guntur</p>
+          </div>
+    
+      </div>
+    </div>
+
+    <!-- Welcome Section -->
+    <div class="home-content">
+      <h2>Welcome to Our Food Delivery Service</h2>
+      <p>Discover a variety of delicious meals delivered straight to your doorstep.</p>
+      <div class="home-options">
+        <div class="option">
+          <i class="fa-solid fa-motorcycle"></i>
+          <h3>Fast Delivery</h3>
+          <p>Get your food delivered in record time.</p>
+        </div>
+        <div class="option">
+          <i class="fa-solid fa-star"></i>
+          <h3>Top-rated Restaurants</h3>
+          <p>Order from the best restaurants in your city.</p>
+        </div>
+        <div class="option">
+          <i class="fa-solid fa-tags"></i>
+          <h3>Exclusive Offers</h3>
+          <p>Save big with special discounts and offers.</p>
+          <button class="get-offer-btn">Get Offer</button>
+         <!-- Add this anywhere in your HTML body (preferably after the button) -->
+<div id="offer-content" style="margin-top: 20px;"></div>
+
+        </div>
+        <div class="option">
+          <i class="fa-solid fa-utensils"></i>
+          <h3>Wide Variety</h3>
+          <p>Explore a diverse range of cuisines and dishes.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2025 Swiggy Clone | Developed by Dedeepya</p>
-        <p>
-            <a href="privacy.html">Privacy Policy</a> | 
-            <a href="terms.html">Terms of Service</a> | 
-            <a href="contact.html">Contact Us</a>
-        </p>
+      <p>&copy; 2025 Swiggy Clone | Developed by Dedeepya</p>
+      <p>
+        <a href="privacy.html">Privacy Policy</a> | 
+        <a href="terms.html">Terms of Service</a> | 
+        <a href="contact.html">Contact Us</a>
+      </p>
     </footer>
+  </div>
+
+  <!-- Scroll Script -->
+  <script>
+    function scrollLeft() {
+      const foodScroll = document.getElementById("foodScroll");
+      foodScroll.scrollBy({ left: -300, behavior: 'smooth' });
+    }
+
+    function scrollRight() {
+      const foodScroll = document.getElementById("foodScroll");
+      foodScroll.scrollBy({ left: 300, behavior: 'smooth' });
+      <button class="get-offer-btn" id="load-offer-btn">Get Offer</button>
+
+    }
+  </script>
 </body>
 </html>
